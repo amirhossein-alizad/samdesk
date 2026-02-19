@@ -47,11 +47,32 @@ public class Solution {
         }
         return true;
     }
+
+    public static boolean isSafeWithDampner(int[] report) {
+        if(report.length == 2) return true;
+        for(int skip = 0; skip < report.length; skip++) {
+            int[] copy = new int[report.length - 1];
+            int j = 0;
+            for(int i = 0; i < report.length; i++)  {
+                if(i == skip) continue;
+                copy[j] = report[i];
+                j++;
+            }
+            if(isSafe(copy)) return true;
+        }
+        return false;
+    }
+
     public static int redNosedReport() throws IOException {
         List<int[]> reports = readInputs();
         int safe = 0;
         for(int[] report : reports) {
+            //TODO: FOR EACH PART, COMMENT THE OTHER PART OUT
+            //FIRST PART OF THE PROBLEM
             if(isSafe(report))
+                safe++;
+            //SECOND PART OF THE PROBLEM
+            if(isSafeWithDampner(report))
                 safe++;
         }
         return safe;
